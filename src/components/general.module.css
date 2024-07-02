@@ -1,0 +1,10 @@
+.card {
+    width: 80%;
+    margin: auto auto 30px;
+}
+
+.header {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}

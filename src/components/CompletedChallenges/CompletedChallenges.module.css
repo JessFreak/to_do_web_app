@@ -1,0 +1,16 @@
+.completedChallenges {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.completedChallenges th,
+.completedChallenges td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.completedChallenges th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}

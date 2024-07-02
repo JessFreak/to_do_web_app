@@ -1,0 +1,31 @@
+.idea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.idea p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.idea span {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.idea:hover {
+    transform: scale(1.05);
+    border-color: #000;
+}
