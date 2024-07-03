@@ -1,6 +1,6 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { IdeasDTO } from '../models/IdeaDTO.js';
+import { IdeasDTO } from '../models/IdeasDTO.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
