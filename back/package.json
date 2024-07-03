@@ -1,0 +1,14 @@
+{
+  "name": "extrums-test-task-front",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^5.16.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "prisma": "^5.16.1"
+  }
+}
