@@ -1,24 +1,21 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { IdeaDTO } from '../models/IdeaDTO.js';
+import { IdeasDTO } from '../models/IdeaDTO.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
-router.post('/', IdeaDTO, async (req, res) => {
-  const { title, type, isCompleted } = req.body;
+router.post('/', IdeasDTO, async (req, res) => {
+  const ideas = req.body;
+
   try {
-    const newIdea = await prisma.idea.create({
-      data: {
-        title,
-        type,
-        isCompleted,
-      },
+    const createdIdeas = await prisma.idea.createMany({
+      data: ideas,
     });
-    res.status(201).json(newIdea);
+    res.status(201).json(createdIdeas);
   } catch (error) {
-    console.error('Error creating idea:', error);
-    res.status(500).json({ error: 'Failed to create idea' });
+    console.error('Error creating ideas:', error);
+    res.status(500).json({ error: 'Failed to create ideas' });
   }
 });
 

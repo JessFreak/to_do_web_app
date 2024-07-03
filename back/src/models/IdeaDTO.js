@@ -1,9 +1,10 @@
 import { body, validationResult } from 'express-validator';
 
-export const IdeaDTO = [
-  body('title').isString().notEmpty(),
-  body('type').isString().optional(),
-  body('isCompleted').isBoolean().optional(),
+export const IdeasDTO = [
+  body().isArray(),
+  body('*.title').isString().notEmpty(),
+  body('*.type').isString().optional(),
+  body('*.isCompleted').isBoolean().optional(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
