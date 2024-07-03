@@ -8,6 +8,7 @@ const App = () => {
   const [freshIdeas, setFreshIdeas] = useState([]);
   const [ideasInMyList, setIdeasInMyList] = useState([]);
   const [completedIdeas, setCompletedIdeas] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchIdeas = async () => {
@@ -26,7 +27,7 @@ const App = () => {
       }
     };
 
-    fetchIdeas();
+    fetchIdeas().then();
   }, []);
 
   const handleFreshIdea = (index) => {
@@ -34,6 +35,9 @@ const App = () => {
     const selectedIdea = updatedIdeas.splice(index, 1)[0];
     setFreshIdeas(updatedIdeas);
 
+    if (ideasInMyList.length === 1) {
+      setCurrentIndex(1);
+    }
     setIdeasInMyList([...ideasInMyList, selectedIdea]);
   };
 
@@ -44,6 +48,9 @@ const App = () => {
     selectedIdea.when = new Date();
 
     setIdeasInMyList(updatedIdeas);
+    if (ideasInMyList.length === currentIndex + 1) {
+      setCurrentIndex(currentIndex - 1);
+    }
     setCompletedIdeas([...completedIdeas, selectedIdea]);
   };
 
@@ -51,7 +58,7 @@ const App = () => {
   return (
     <div>
       <FreshIdeas ideas={freshIdeas} onIdeaClick={handleFreshIdea} />
-      <IdeasInMyList ideas={ideasInMyList} onIdeaClick={handleIdeaClick} />
+      <IdeasInMyList ideas={ideasInMyList} onIdeaClick={handleIdeaClick} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
       <Achievements ideas={completedIdeas} />
       <CompletedChallenges ideas={completedIdeas} />
     </div>
