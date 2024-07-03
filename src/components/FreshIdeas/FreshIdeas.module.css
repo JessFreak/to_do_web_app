@@ -1,3 +1,7 @@
+.card {
+    height: 18rem;
+}
+
 .ideas {
     display: flex;
     justify-content: space-around;

@@ -17,25 +17,27 @@ const IdeasInMyList = ({ ideas, onIdeaClick, currentIndex, setCurrentIndex }) =>
   };
 
   return (
-    <Card className={general.card}>
+    <Card className={`${general.card} ${styles.card}`}>
       <h2 className={general.header}>Ideas in my list</h2>
       {ideas.length > 0 ? (
-        <div className={styles.ideasList}>
-          <button className={styles.navButton} onClick={handlePrev}>&lt;</button>
-          {ideas.slice(currentIndex, currentIndex + 3).map((idea, index) => (
-            <Idea
-              key={index}
-              title={idea.title}
-              type={idea.type}
-              onClick={() => onIdeaClick(currentIndex + index)}
-              short={index !== 1}
-            />
-          ))}
-          <button className={styles.navButton} onClick={handleNext}>&gt;</button>
+        <>
+          <div className={styles.ideasList}>
+            <button className={styles.navButton} onClick={handlePrev}>&lt;</button>
+            {ideas.slice(currentIndex, currentIndex + 3).map((idea, index) => (
+              <Idea
+                key={index}
+                title={idea.title}
+                type={idea.type}
+                onClick={() => onIdeaClick(currentIndex + index)}
+                short={index !== 1}
+              />
+            ))}
+            <button className={styles.navButton} onClick={handleNext}>&gt;</button>
+          </div>
           <p className={general.header}>
             {currentIndex + 1} / {ideas.length}
           </p>
-        </div>
+        </>
       ) : (
         <h2 className={general.header}>No ideas in list</h2>
       )}

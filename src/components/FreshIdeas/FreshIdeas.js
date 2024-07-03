@@ -10,7 +10,7 @@ const FreshIdeas = ({ ideas, onIdeaClick }) => {
   };
 
   return (
-    <Card className={general.card}>
+    <Card className={`${general.card} ${styles.card}`}>
       <h2 className={general.header}>Choose fresh ideas to do</h2>
       <div className={styles.ideas}>
         {ideas.slice(0, 4).map((idea, index) => (

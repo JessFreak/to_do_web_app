@@ -30,14 +30,16 @@ const Achievements = ({ ideas }) => {
   return (
     <Card className={general.card}>
       <h2 className={general.header}>Achievements</h2>
-      <div className={styles.achievements}>
-        {achievements.map((achievement, index) => (
-          <div key={index} className={styles.achievement}>
-            <span>{achievement.count}</span>
-            <p>{achievement.type}</p>
-          </div>
-        ))}
-      </div>
+      {achievements.length > 0
+        ? <div className={styles.achievements}>
+          {achievements.map((achievement, index) => (
+            <div key={index} className={styles.achievement}>
+              <span>{achievement.count}</span>
+              <p>{achievement.type}</p>
+            </div>
+          ))}
+        </div>
+        : <h2 className={general.header}>No achievements</h2>}
     </Card>
   );
 };
