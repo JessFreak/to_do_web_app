@@ -5,11 +5,32 @@ import Achievements from './Achievments/Achievments';
 import CompletedChallenges from './CompletedChallenges/CompletedChallenges';
 
 const App = () => {
-  const [freshIdeas, setFreshIdeas] = useState([]);
-  const [ideasInMyList, setIdeasInMyList] = useState([]);
-  const [completedIdeas, setCompletedIdeas] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [ideasInMyList, setIdeasInMyList] = useState(() => {
+    const storedIdeas = localStorage.getItem('ideasInMyList');
+    return storedIdeas ? JSON.parse(storedIdeas) : [];
+  });
+  const [completedIdeas, setCompletedIdeas] = useState(() => {
+    const storedIdeas = localStorage.getItem('completedIdeas');
+    return storedIdeas ? JSON.parse(storedIdeas) : [];
+  });
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const storedIndex = localStorage.getItem('currentIndex');
+    return storedIndex ? parseInt(storedIndex) : 0;
+  });
 
+  useEffect(() => {
+    localStorage.setItem('ideasInMyList', JSON.stringify(ideasInMyList));
+  }, [ideasInMyList]);
+
+  useEffect(() => {
+    localStorage.setItem('completedIdeas', JSON.stringify(completedIdeas));
+  }, [completedIdeas]);
+
+  useEffect(() => {
+    localStorage.setItem('currentIndex', currentIndex.toString());
+  }, [currentIndex]);
+
+  const [freshIdeas, setFreshIdeas] = useState([]);
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
@@ -53,7 +74,6 @@ const App = () => {
     }
     setCompletedIdeas([...completedIdeas, selectedIdea]);
   };
-
 
   return (
     <div>
