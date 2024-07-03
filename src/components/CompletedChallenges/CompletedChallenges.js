@@ -2,13 +2,12 @@ import React from 'react';
 import styles from './CompletedChallenges.module.css';
 import general from '../general.module.css';
 import Card from '../UI/Card/Card';
+import { formatDistanceToNow } from 'date-fns';
 
-const CompletedChallenges = () => {
-  const challenges = [
-    { title: 'Learn how to fold a paper crane', type: 'Education', when: 'Just now' },
-    { title: 'Learn how to fold a paper crane', type: 'Relaxation', when: 'Yesterday' },
-    { title: 'Learn how to fold a paper crane', type: 'Sport', when: 'A week ago' }
-  ];
+const CompletedChallenges = ({ ideas }) => {
+  const formatWhen = (date) => {
+    return formatDistanceToNow(date, { addSuffix: true });
+  };
 
   return (
     <Card className={general.card}>
@@ -16,17 +15,19 @@ const CompletedChallenges = () => {
       <table className={styles.completedChallenges}>
         <thead>
         <tr>
+          <th>#</th>
           <th>Title</th>
           <th>Type</th>
           <th>When</th>
         </tr>
         </thead>
         <tbody>
-        {challenges.map((challenge, index) => (
+        {ideas.map((challenge, index) => (
           <tr key={index}>
+            <td>{index + 1}</td>
             <td>{challenge.title}</td>
             <td>{challenge.type}</td>
-            <td>{challenge.when}</td>
+            <td>{formatWhen(challenge.when)}</td>
           </tr>
         ))}
         </tbody>

@@ -3,14 +3,29 @@ import styles from './Achievements.module.css';
 import general from '../general.module.css';
 import Card from '../UI/Card/Card';
 
-const Achievements = () => {
-  const achievements = [
-    { type: 'Recreational', count: 1 },
-    { type: 'Social', count: 3 },
-    { type: 'Education', count: 5 },
-    { type: 'Sport', count: 3 },
-    { type: 'Relaxation', count: 11 }
-  ];
+const Achievements = ({ ideas }) => {
+  const countThemes = () => {
+    return ideas.reduce((counts, idea) => {
+      const { type } = idea;
+      if (counts[type]) {
+        counts[type] += 1;
+      } else {
+        counts[type] = 1;
+      }
+      return counts;
+    }, {});
+  };
+
+  const generateAchievements = () => {
+    const themeCounts = countThemes();
+
+    return Object.keys(themeCounts).map((type) => ({
+      type,
+      count: themeCounts[type],
+    }));
+  };
+
+  const achievements = generateAchievements();
 
   return (
     <Card className={general.card}>

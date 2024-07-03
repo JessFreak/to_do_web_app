@@ -1,9 +1,3 @@
-.header {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
 .ideas {
     display: flex;
     justify-content: space-around;
