@@ -17,7 +17,7 @@
     font-size: 2em;
     cursor: pointer;
     margin: 0 20px;
-    color: #ccc;
+    color: grey;
     transition: color 0.2s;
 }
 
@@ -32,8 +32,8 @@
 .actionButton {
     padding: 10px 20px;
     margin: 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #e7e7c0;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -41,6 +41,6 @@
     font-size: 1.7rem;
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #ffd97d;
     }
 }
