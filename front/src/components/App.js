@@ -34,18 +34,8 @@ const App = () => {
   const [freshIdeas, setFreshIdeas] = useState([]);
   useEffect(() => {
     const fetchIdeas = async () => {
-      try {
-        const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://bored-api.appbrewery.com/filter?'));
-        const data = await response.json();
-        const parsedData = JSON.parse(data.contents).map(item => ({
-          title: item.activity,
-          type: item.type,
-        }));
-
-        setFreshIdeas(parsedData);
-      } catch (error) {
-        console.error('Error fetching ideas:', error);
-      }
+      const parsedIdeas = await IdeasApi.getFreshIdeas();
+      setFreshIdeas(parsedIdeas);
     };
 
     fetchIdeas().then();

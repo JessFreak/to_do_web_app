@@ -1,6 +1,19 @@
 export class IdeasApi {
   static URL = 'http://localhost:3001/ideas';
 
+  static async getFreshIdeas() {
+    try {
+      const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://bored-api.appbrewery.com/filter?'));
+      const data = await response.json();
+      return JSON.parse(data.contents).map(item => ({
+        title: item.activity,
+        type: item.type,
+      }));
+    } catch (error) {
+      console.error('Error fetching ideas:', error);
+    }
+  }
+
   static async getAll() {
     try {
       const responseFalse = await fetch(`${IdeasApi.URL}?isCompleted=false`);

@@ -23,7 +23,7 @@ const FreshIdeas = ({ ideas, onIdeaClick }) => {
             />
           ))}
         </div>
-        : <h2 className={general.header}>Pending...</h2>
+        : <h2 className={general.header}>Loading...</h2>
       }
     </Card>
   );
