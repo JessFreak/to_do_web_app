@@ -4,7 +4,7 @@ import general from '../general.module.css';
 import Card from '../UI/Card/Card';
 import Idea from '../Idea/Idea';
 
-const IdeasInMyList = ({ ideas, onIdeaClick, currentIndex, setCurrentIndex }) => {
+const IdeasInMyList = ({ ideas, onIdeaClick, currentIndex, setCurrentIndex, handlePullData, handleStoreData }) => {
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? ideas.length - 1 : prevIndex - 1));
   };
@@ -25,7 +25,7 @@ const IdeasInMyList = ({ ideas, onIdeaClick, currentIndex, setCurrentIndex }) =>
             <button className={styles.navButton} onClick={handlePrev}>&lt;</button>
             {ideas.slice(currentIndex, currentIndex + 3).map((idea, index) => (
               <Idea
-                key={index}
+                key={`list${index}`}
                 title={idea.title}
                 type={idea.type}
                 onClick={() => onIdeaClick(currentIndex + index)}
@@ -37,10 +37,19 @@ const IdeasInMyList = ({ ideas, onIdeaClick, currentIndex, setCurrentIndex }) =>
           <p className={general.header}>
             {currentIndex + 1} / {ideas.length}
           </p>
+
         </>
       ) : (
         <h2 className={general.header}>No ideas in list</h2>
       )}
+      <div className={styles.buttons}>
+        <button className={styles.actionButton} onClick={handleStoreData}>
+          Store Data
+        </button>
+        <button className={styles.actionButton} onClick={handlePullData}>
+          Pull Data
+        </button>
+      </div>
     </Card>
   );
 };

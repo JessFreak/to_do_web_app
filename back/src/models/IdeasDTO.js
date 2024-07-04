@@ -5,7 +5,8 @@ export const IdeasDTO = [
   body('*.title').isString().notEmpty(),
   body('*.type').isString().notEmpty(),
   body('*.isCompleted').isBoolean().optional(),
-  body('*.when').isDate().optional(),
+  body('*.when').isISO8601().optional({ nullable: true }),
+
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

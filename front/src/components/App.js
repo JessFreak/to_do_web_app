@@ -3,6 +3,7 @@ import FreshIdeas from './FreshIdeas/FreshIdeas';
 import IdeasInMyList from './IdeasInMyList/IdeasInMyList';
 import Achievements from './Achievments/Achievments';
 import CompletedChallenges from './CompletedChallenges/CompletedChallenges';
+import { IdeasApi } from '../api/IdeasApi';
 
 const App = () => {
   const [ideasInMyList, setIdeasInMyList] = useState(() => {
@@ -39,7 +40,6 @@ const App = () => {
         const parsedData = JSON.parse(data.contents).map(item => ({
           title: item.activity,
           type: item.type,
-          key: item.key,
         }));
 
         setFreshIdeas(parsedData);
@@ -67,6 +67,7 @@ const App = () => {
     const selectedIdea = updatedIdeas.splice(index, 1)[0];
 
     selectedIdea.when = new Date();
+    selectedIdea.isCompleted = true;
 
     setIdeasInMyList(updatedIdeas);
     if (ideasInMyList.length === currentIndex + 1) {
@@ -75,10 +76,28 @@ const App = () => {
     setCompletedIdeas([...completedIdeas, selectedIdea]);
   };
 
+  const handleStoreData = async () => {
+    const ideas = [...ideasInMyList, ...completedIdeas]
+    await IdeasApi.createMany(ideas);
+  };
+
+  const handlePullData = async () => {
+    const { ideas, completedIdeas } = await IdeasApi.getAll();
+    console.log(ideas, completedIdeas);
+    setIdeasInMyList(ideas);
+    setCompletedIdeas(completedIdeas);
+    if (ideas.length >= 2) {
+      setCurrentIndex(1);
+    }
+  };
+
   return (
     <div>
       <FreshIdeas ideas={freshIdeas} onIdeaClick={handleFreshIdea} />
-      <IdeasInMyList ideas={ideasInMyList} onIdeaClick={handleIdeaClick} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+      <IdeasInMyList ideas={ideasInMyList} onIdeaClick={handleIdeaClick}
+                     currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}
+                     handleStoreData={handleStoreData} handlePullData={handlePullData}
+      />
       <Achievements ideas={completedIdeas} />
       <CompletedChallenges ideas={completedIdeas} />
     </div>

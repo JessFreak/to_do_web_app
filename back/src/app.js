@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import ideasRouter from './routes/ideas.js';
 
 dotenv.config();
@@ -8,6 +9,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', async (req, res) => {
   res.send('Backend for extrums');

@@ -17,7 +17,7 @@ const FreshIdeas = ({ ideas, onIdeaClick }) => {
           <Idea
             title={idea.title}
             type={idea.type}
-            key={idea.key}
+            key={`fresh${index}`}
             onClick={() => handleIdeaClick(index)}
           />
         ))}
