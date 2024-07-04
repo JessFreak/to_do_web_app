@@ -7,32 +7,24 @@ const prisma = new PrismaClient();
 
 router.post('/', IdeasDTO, async (req, res) => {
   const ideas = req.body;
-  const ideasToCreate = ideas.filter(idea => !idea.id);
-  const ideasToUpdate = ideas.filter(idea => idea.id);
 
   try {
-    const createdIdeas = await prisma.idea.createMany({
-      data: ideasToCreate,
-    });
-
-    const updatedIdeasPromises = ideasToUpdate.map(idea =>
-      prisma.idea.update({
-        where: { id: idea.id },
-        data: {
+    const resultPromise = ideas.map(idea =>
+      prisma.idea.upsert({
+        where: { id: idea.id || 0 },
+        update: {
+          when: idea.when,
+          isCompleted: idea.isCompleted,
+        },
+        create: {
           title: idea.title,
           type: idea.type,
-          isCompleted: idea.isCompleted,
-          when: idea.when,
         },
       })
     );
 
-    const updatedIdeas = await Promise.all(updatedIdeasPromises);
-
-    res.status(201).json({
-      createdIdeas: createdIdeas.count,
-      updatedIdeas: updatedIdeas.length,
-    });
+    const result = await Promise.all(resultPromise);
+    res.status(201).json(result);
   } catch (error) {
     console.error('Error processing ideas:', error);
     res.status(500).json({ error: 'Failed to process ideas' });
