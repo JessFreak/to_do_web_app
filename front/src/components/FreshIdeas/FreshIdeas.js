@@ -12,16 +12,19 @@ const FreshIdeas = ({ ideas, onIdeaClick }) => {
   return (
     <Card className={`${general.card} ${styles.card}`}>
       <h2 className={general.header}>Choose fresh ideas to do</h2>
-      <div className={styles.ideas}>
-        {ideas.slice(0, 4).map((idea, index) => (
-          <Idea
-            title={idea.title}
-            type={idea.type}
-            key={`fresh${index}`}
-            onClick={() => handleIdeaClick(index)}
-          />
-        ))}
-      </div>
+      {Array.isArray(ideas)
+        ? <div className={styles.ideas}>
+          {ideas.slice(0, 4).map((idea, index) => (
+            <Idea
+              title={idea.title}
+              type={idea.type}
+              key={`fresh${index}`}
+              onClick={() => handleIdeaClick(index)}
+            />
+          ))}
+        </div>
+        : <h2 className={general.header}>Pending...</h2>
+      }
     </Card>
   );
 };

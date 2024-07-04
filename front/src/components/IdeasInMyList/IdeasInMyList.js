@@ -37,7 +37,6 @@ const IdeasInMyList = ({ ideas, onIdeaClick, currentIndex, setCurrentIndex, hand
           <p className={general.header}>
             {currentIndex + 1} / {ideas.length}
           </p>
-
         </>
       ) : (
         <h2 className={general.header}>No ideas in list</h2>

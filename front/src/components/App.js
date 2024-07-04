@@ -83,7 +83,6 @@ const App = () => {
 
   const handlePullData = async () => {
     const { ideas, completedIdeas } = await IdeasApi.getAll();
-    console.log(ideas, completedIdeas);
     setIdeasInMyList(ideas);
     setCompletedIdeas(completedIdeas);
     if (ideas.length >= 2) {
