@@ -7,6 +7,9 @@ Project built with React library.
 
 In the project directory, you can run:
 
+### `yarn install`
+Command for installing and dependencies.
+
 ### `yarn start`
 
 Runs the app in the development mode.\

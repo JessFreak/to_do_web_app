@@ -1,11 +1,12 @@
 .card {
     width: 80%;
     margin: auto auto 30px;
-    background-color: #ff9b85;
+    background-color: #87BFFF;
 }
 
 .header {
-    font-size: 1.5em;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     text-align: center;
+    color: #367bda;
 }
