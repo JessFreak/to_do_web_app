@@ -1,5 +1,5 @@
 export class IdeasApi {
-  static URL = 'http://localhost:3001/ideas';
+  static URL = 'http://localhost:4000/ideas';
 
   static async getFreshIdeas() {
     try {
