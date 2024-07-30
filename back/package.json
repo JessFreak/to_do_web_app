@@ -11,5 +11,8 @@
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "prisma": "^5.16.1"
+  },
+  "scripts": {
+    "start": "npx prisma db push && npx prisma generate && node ."
   }
 }

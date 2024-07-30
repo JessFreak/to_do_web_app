@@ -1,5 +1,5 @@
 export class IdeasApi {
-  static URL = 'http://localhost:4000/ideas';
+  static URL = `${process.env.REACT_APP_API_URL}/ideas`;
 
   static async getFreshIdeas() {
     try {
@@ -34,6 +34,7 @@ export class IdeasApi {
   }
 
   static async createMany(ideas) {
+    console.log(IdeasApi.URL);
     try {
       const response = await fetch(IdeasApi.URL, {
         method: 'POST',

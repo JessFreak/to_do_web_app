@@ -11,8 +11,6 @@ services:
       - '5432:5432'
     volumes:
       - ./data:/var/lib/postgresql/data
-    networks:
-      - my_network
 
   api:
     depends_on:
@@ -21,18 +19,15 @@ services:
     container_name: api_backend
     ports:
       - '4000:4000'
-    volumes:
-      - ./api:/app
     env_file:
       - back/.env
-    stdin_open: true
-    tty: true
-    networks:
-      - my_network
 
-volumes:
-  data:
-
-networks:
-  my_network:
-    driver: bridge
+  client:
+    depends_on:
+      - api
+    build: ./front
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    env_file:
+      - front/.env

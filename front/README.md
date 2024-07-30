@@ -1,7 +1,11 @@
-# Frontend part of Extrums test task
+# Frontend part of TODO web app
 
 The goal of this app is creating the project by [wireframe](https://spectacular-magazine-7fe.notion.site/Application-Wireframe-c2b106e52c9547b3a56ab3ef74c9dd33).
 Project built with React library. 
+
+### Fill environment variables:
+Create a .env file in the root directory based on .env.example.
+Fill in the necessary environment variables such as database connection details.
 
 ## Available Scripts
 

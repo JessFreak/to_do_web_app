@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', async (req, res) => {
-  res.send('Backend for extrums');
+  res.send('Backend for TODO app');
 });
 
 app.use('/ideas', ideasRouter);
